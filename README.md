@@ -1,2 +1,4 @@
-# ln
-The LambdaNEW programming language and tool chain
+# NU
+
+The LambdaNEW programming language, REPL and coding tool chain.
+
