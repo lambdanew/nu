@@ -7,10 +7,13 @@ import (
 	"github.com/alecthomas/participle/v2/lexer"
 )
 
+// regex patterns for various rules
+// see https://github.com/google/re2/wiki/Syntax
+
 const (
 	IdentDef      = `[a-zA-Z]\w*`
 	NumberDef     = `[-+]?(\d*\.)?\d+`
-	GlobalIDDef   = `#[a-fA-F0-9]\w*` // FIXME this is not correct!
+	AddressDef    = `#[a-fA-F0-9]{20}`
 	StringDef     = `"(\\"|[^"])*"`
 	PunctDef      = `[-[!@#$%^&*()+_={}\|:;"'<,>.?/]|]`
 	WhiteSpaceDef = `[ \t\n\r]+`
@@ -27,7 +30,7 @@ type (
 	}
 
 	DirectObject struct {
-		Name        string          `(@Ident | @GlobalID | @String)`
+		Name        string          `(@Address | @Ident | @String)`
 		IndirectObj *IndirectObject `@@*`
 	}
 
@@ -41,7 +44,7 @@ type (
 			(("off" "of") | "off" | "through" | "over" | "is" | "as" | "for" | "about")
 			)?`
 
-		Name string `(@Ident | @GlobalID | @String)?`
+		Name string `(@Address | @Ident | @String)`
 	}
 )
 
@@ -50,7 +53,7 @@ var (
 		{"Ident", IdentDef, nil},
 		{"Number", NumberDef, nil},
 		{"String", StringDef, nil},
-		{"GlobalID", GlobalIDDef, nil},
+		{"Address", AddressDef, nil},
 		{"Punct", PunctDef, nil},
 		{"Whitespace", WhiteSpaceDef, nil},
 	})

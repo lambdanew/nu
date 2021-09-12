@@ -39,8 +39,8 @@ func TestVerbObj(t *testing.T) {
 	fmt.Printf("'%s' -> %s\n", cmd, ast.ToString())
 }
 
-func TestVerbDirectObj(t *testing.T) {
-	cmd := "take #1234"
+func TestVerbObjAddress(t *testing.T) {
+	cmd := "take #0123456789abcdefffff"
 	ast, err := ParseCommand(cmd)
 
 	assert.NoError(t, err)
