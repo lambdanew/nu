@@ -20,8 +20,8 @@ import (
 	"crypto/rand"
 	"testing"
 
-	bip39 "github.com/cosmos/go-bip39"
 	"github.com/gtank/merlin"
+	bip39 "github.com/tyler-smith/go-bip39"
 
 	"github.com/stretchr/testify/require"
 )
