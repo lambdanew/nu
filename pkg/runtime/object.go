@@ -6,7 +6,7 @@ import (
 
 const (
 	// things
-	ObjectTypeWorld    = 0
+	ObjectTypeNode     = 0
 	ObjectTypePlace    = 1
 	ObjectTypeThing    = 2
 	ObjectTypeLocation = 3
@@ -33,7 +33,7 @@ type (
 	Object struct {
 		// names and address
 		Name     string         // a 'short name', without any space
-		LongName string         // a more descriptive name
+		LongName string         // a more descriptive name of the object, almost it's 'description'
 		Address  common.Address // 160bit address / UUID of the object
 		Type     ObjectType     // defines the kind of object
 

@@ -22,6 +22,6 @@ func New() (*LambdaNewRuntime, error) {
 }
 
 func createRootObject() (*Object, error) {
-	o := NewObject("root", ObjectTypeWorld, nil)
+	o := NewObject("root", ObjectTypeNode, nil)
 	return o, nil
 }

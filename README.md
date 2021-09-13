@@ -1,4 +1,109 @@
-# NU
+## NU - The LambdaNEW programming language, runtime, REPL and VM
 
-The LambdaNEW programming language, REPL and coding tool chain.
+What this is:
+* NU, the LambdaNEW programming language
+* a repl for NU
+* the runtime and VM(tbd) to execute NU
 
+What this is NOT:
+* a blockchain/coin/NFT/Game/Metaverse
+* a node/server implementing the above
+
+## Overview
+
+The README is structured like this:
+
+* Basic Terminology
+
+
+### Basic Terminology
+
+LambdaNEW (the project, system, MOO) and NU (it's programming language) inherit A LOT of the concepts introduced in the original LambdaMoo [1][2] but a lot has changed since the late 1990' and LambdaNEW (NU for short) is an experiment to implement the ideas from back then with current capabilities in servers, resources, programming languages and other concepts. 
+
+#### Objects, Verbs and Properties
+
+NU consists of objects.
+
+NU objects have properties and verbs.
+
+Properties are values stored on the object and referenced in code via the "." syntax, for example:
+
+```shell
+someVariable = object.propertyName
+```
+
+Verbs are code stored on the object and also invoked in code via the "." syntax, for example:
+
+```shell
+someVariable = object.verbName()
+```
+
+#### Object Orientation
+
+MOO stands for "Mud, Object-Oriented". MOO's object-oriented approach is slightly different from many object-oriented programming langauges. In most object-oriented languages, there is a division between object definition (a class) and instances of the object in the system. The object definitions exist in the source code, but your executable code in the system never deals with them directly. Instead you create "instances" of a given class and use the instance.
+
+In the MOO world, the object is defined by example. You create an object instance in the system and then dynamically add verbs and properties to make your "prototype". Then you can create a new object that is a "decendant" from the original object. The new object in turn can be dynamically modified with more verbs and properties, and then you can create more objects that descend from the second object.
+
+#### Types of Objects
+
+All objects in NU implement the same concepts (object, verbs, properties etc) but depending on the *TYPE* of object, the runtime behaves differently.
+
+The following object types are currently supported:
+
+* Node
+* Place
+* Location
+* Thing
+* Actor
+** Person
+** Bot
+** Agent
+** Twin
+
+Every NU instance (the `runtime`) has one root object of type `Node`. Node contains all other objects in the current runtime.
+
+A `Place` represents a logical/abstract location (e.g. a room or building).
+
+A Place can have a `Location`. A Location can represent a reference to the place in the physical world, e.g. by providing an address or coordinates.
+
+A `Thing` represents anything in a Node that can be interacted with.
+
+`Actor` as object type is never instantiated but represents an abstract type for objects that interact with other objects in the Node. This can be one of the following:
+
+* `Person` representing a real person
+* `Bot`, a stationary software agent
+* `Agent`, a mobile software agent, acting on behave of a `Person`
+* `Twin`, a *projection* of a Person from a remote Node into the current Node
+
+#### Containment rules
+
+* All objects except Node have 1 parent object
+* Node contains 0..n Places, Things and Actors
+* Place contains 0..n Places, Things and Actors
+* Place has 0 or 1 Location
+* Location contains 0 Objects
+* Thing contains 0..n Things
+* Person contains 0..n  Things
+* Person has to be in exactly 1 Place
+* Bot, Agent and Twin contain 0 Objects
+* Bot, Agent and Twin can be in Node or in 1 Place
+
+
+#### Object migration
+
+* Place, Person, Bot and Agent can `migrate` from one Node to another Node
+* Node and Twin can `NOT` migrate from one Node to another Node
+* Objects contained in another Object migrate with the parent object
+* Access controll rules might prevent the object migration
+
+
+#### Is NU case-sensitive?
+
+YES.
+
+However, this rule is relaxed in the REPL. The REPL allows a user to directly interact with the runtime. In order to avoid that people get frustrated because of typos, object names, property names and verb names are treated as case-insensitive. 
+
+### References
+
+* [1](http://www.moo-cows.com/docs/manuals/ProgrammersManual.html)
+* [2](https://github.com/lambdanew/lambda-moo-programming/blob/master/tutorials/moo-programmers-manual-updated.md)
