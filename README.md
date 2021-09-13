@@ -15,9 +15,9 @@ What this is NOT:
 
 ## Overview
 
-### Basic Terminology
+## Basic Terminology
 
-#### Objects, Verbs and Properties
+### Objects, Verbs and Properties
 
 NU consists of objects.
 
@@ -35,7 +35,7 @@ Verbs are code stored on the object and invoked in code via the "." operator, fo
 someVariable = object.verbName()
 ```
 
-#### Object Orientation
+### Object Orientation
 
 MOO stands for "Mud, Object-Oriented". MOO's object-oriented approach is slightly different from many object-oriented programming langauges. In most object-oriented languages, there is a division between object definition (the class) and instances of the object in the system. The object definition exists in the source code, but the executable code never deals with them directly. Instead you create an "instance" of a given class and use this instance.
 
@@ -43,7 +43,7 @@ In the MOO world, the object is defined by example. You create an object instanc
 
 NU follows MOO's approach to OO.
 
-#### Types of Objects
+### Types of Objects
 
 All objects implement the same basic concepts:
 
@@ -75,7 +75,7 @@ A `Thing` represents anything in a Node that can be interacted with.
 * `Agent`, a mobile software agent, acting on behave of a `Person`
 * `Twin`, a *projection* of a Person from an external Node into the current Node
 
-#### Containment rules
+### Containment rules
 
 * All objects except Node have exactly 1 parent object
 * Objects can not be contained in more than one object (same as above rule, just to be sure ...)
@@ -90,7 +90,7 @@ A `Thing` represents anything in a Node that can be interacted with.
 * Bot, Agent and Twin can be in Node or in Place
 
 
-#### Object migration
+### Object migration
 
 * Place, Person, Bot and Agent can `migrate` from one Node to another Node
 * Node and Twin can `NOT migrate` from one Node to another Node
@@ -98,18 +98,18 @@ A `Thing` represents anything in a Node that can be interacted with.
 * Access controll, object permissions or ownership rules might prevent object migration
 
 
-#### Access controll, object permissions or ownership rules
+### Access controll, object permissions or ownership rules
 
 TBD
 
 
-#### Is NU case-sensitive?
+### Is NU case-sensitive?
 
 YES.
 
 However, this rule is relaxed in the REPL. The REPL allows a user to directly interact with the runtime. In order to avoid that people get frustrated because of typos, object names, property names and verb names are treated as case-insensitive. 
 
-### References
+## References
 
 * [1: ProgrammersManual.html](http://www.moo-cows.com/docs/manuals/ProgrammersManual.html)
 * [2: moo-programmers-manual-updated.md](https://github.com/lambdanew/lambda-moo-programming/blob/master/tutorials/moo-programmers-manual-updated.md)
