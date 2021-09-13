@@ -49,7 +49,7 @@ All objects implement the same basic concepts:
 
 * Objects have Verbs and Properties
 * Objects can contain other objects
-* Each object has exactly one parent object, except for the `root object`
+* Each object has exactly one parent object, except for the `root` object
 * Each object has a set of defined (built-in) attributes and capabilities that can not be removed or modified.
 
 Each object is of one of the following types:
@@ -60,7 +60,7 @@ Each object is of one of the following types:
 * Thing
 * Actor, with sub-type Person, Bot, Agent or Twin
 
-Every NU instance (the runtime, or server) has one root object of type `Node`. Node contains all other objects in the current runtime.
+`Node` is the `root` object of the NU instance/runtime. Node contains all other objects in the runtime.
 
 A `Place` represents a logical or abstract location e.g. a room or building.
 
@@ -68,11 +68,11 @@ A Place can have a `Location`. Location represent a reference to the place in th
 
 A `Thing` represents anything in a Node that can be interacted with.
 
-`Actor` as object type is never instantiated but represents an abstract type for objects that interact with other objects in the Node. `Actor` can be one of the following:
+`Actor` as object type is never instantiated directly but represents an abstract type for objects that interact with other objects in the Node. `Actor` can be one of the following:
 
 * `Person`, representing a real person or user
-* `Bot`, a stationary software agent
-* `Agent`, a mobile software agent, acting on behave of a `Person`
+* `Bot`, a local software agent
+* `Agent`, a bot, acting on behave of a `Person`
 * `Twin`, a *projection* of a Person from an external Node into the current Node
 
 ### Containment rules
@@ -82,32 +82,26 @@ A `Thing` represents anything in a Node that can be interacted with.
 * Node contains 0..n Places, Things and Actors
 * Place contains 0..n Places, Things and Actors
 * Place has 0 or 1 Location
-* Location contains 0 Objects
+* Location can not contain other objects
 * Thing contains 0..n Things
 * Person contains 0..n  Things
 * Person has to be contained in a Place
-* Bot, Agent and Twin contain 0 Objects
+* Bot, Agent and Twin can not contain other objects
 * Bot, Agent and Twin can be in Node or in Place
 
 
 ### Object migration
 
-* Place, Person, Bot and Agent can `migrate` from one Node to another Node
-* Node and Twin can `NOT migrate` from one Node to another Node
+* Place, Thing, Person, Bot and Agent can `migrate` from one Node to another Node
+* Node and Twin `CAN NOT` migrate from one Node to another Node
 * Objects contained in another Object migrate with the parent object
-* Access controll, object permissions or ownership rules might prevent object migration
+* Access controlls, object permissions or ownership rules might prevent object migration
 
 
 ### Access controll, object permissions or ownership rules
 
 TBD
 
-
-### Is NU case-sensitive?
-
-YES.
-
-However, this rule is relaxed in the REPL. The REPL allows a user to directly interact with the runtime. In order to avoid that people get frustrated because of typos, object names, property names and verb names are treated as case-insensitive. 
 
 ## References
 
