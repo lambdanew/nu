@@ -9,6 +9,7 @@ import (
 
 // regex patterns for various rules
 // see https://github.com/google/re2/wiki/Syntax
+// see https://github.com/alecthomas/participle
 
 const (
 	IdentDef      = `[a-zA-Z]\w*`
@@ -60,7 +61,6 @@ var (
 
 	parser = participle.MustBuild(&Command{},
 		participle.Lexer(basicLexer),
-		//participle.Elide("Comment", "Whitespace"),
 		participle.Unquote("String"),
 		participle.Elide("Whitespace"),
 		participle.UseLookahead(2),

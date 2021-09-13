@@ -1,5 +1,6 @@
 # custom stuff
 hack/**
+coverage.txt
 
 # Binaries for programs and plugins
 *.exe
