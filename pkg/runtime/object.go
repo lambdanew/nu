@@ -1,5 +1,9 @@
 package runtime
 
+import (
+	"github.com/lambdanew/ln/pkg/common"
+)
+
 const (
 	// things
 	ObjectTypeWorld    = 0
@@ -23,16 +27,15 @@ const (
 type (
 	ObjectType    int
 	AttributeType int
-	AddressType   string
 
 	Operation func(...Attribute) error // FIXME this might be different e.g. not using attributes but objects ?
 
 	Object struct {
 		// names and address
-		Name     string      // a 'short name', without any space
-		LongName string      // a more descriptive name
-		Address  AddressType // 160bit address / UUID of the object
-		Type     ObjectType  // defines the kind of object
+		Name     string         // a 'short name', without any space
+		LongName string         // a more descriptive name
+		Address  common.Address // 160bit address / UUID of the object
+		Type     ObjectType     // defines the kind of object
 
 		// object hierarchy
 		Parent   *Object
