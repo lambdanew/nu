@@ -1,19 +1,21 @@
 ## NU - The LambdaNEW programming language, runtime, REPL and VM
 
-What this is:
+LambdaNEW and NU, it's programming language and runtime, inherit many ideas from the original LambdaMOO [1][2] system. A lot has changed since LambdaMOO's origin in the mid/late 1990's and this project is an experiment to re-implement many of those ideas with today's technology.
+
+What this repo is:
+
 * A definition of NU, the LambdaNEW programming language
 * An implementation of a REPL for NU
-* The runtime (and VM, tbd) to execute NU
+* The NU runtime (and maybe VM, tbd)
 
 What this is NOT:
+
 * a blockchain/coin/NFT/Game/Metaverse
 * a node/server implementing the above
 
 ## Overview
 
 ### Basic Terminology
-
-LambdaNEW (the project, system, MOO) and NU (it's programming language) inherit A LOT of the concepts introduced in the original LambdaMoo [1][2] but a lot has changed since the late 1990' and LambdaNEW (NU for short) is an experiment to implement the ideas from back then with current capabilities in servers, resources, programming languages and other concepts. 
 
 #### Objects, Verbs and Properties
 
