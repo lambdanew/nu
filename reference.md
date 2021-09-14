@@ -11,6 +11,9 @@
 
 
 
+https://github.com/lambdanew/lambda-moo-programming/blob/master/tutorials/lambda-moo-steven-owens-guide.md
+https://github.com/lambdanew/lambda-moo-programming/blob/master/tutorials/moo-programmers-manual-updated.md#foreword
+
 
 ## References
 
