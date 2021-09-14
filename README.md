@@ -1,12 +1,12 @@
-The LambdaNEW programming language, runtime, REPL and VM
+The LambdaNEW programming language, REPL and runtime
 
-## LambdaNEW programming language, runtime, REPL and VM
+## LambdaNEW programming language and runtime
 
 ### About LambdaNEW
 
-As the name might suggest, LambdaNEW is an experiment to recreate the LambdaMOO experience with today's technology and possibilities. The mobile internet, the wide adoption of messenger apps and ideas from the blockchain community (I see you rolling your eyes ...) influence LambdaNEW. 
+As the name might suggest, LambdaNEW is an experiment to recreate the original LambdaMOO experience with today's technology. The mobile internet, the wide adoption of messenger apps and ideas from the crypto/blockchain community (I see you rolling your eyes ...) influence LambdaNEW. 
 
-Like the old LambdaMOO, it is built around the idea of a relatively small *runtime* i.e. the server or `Node` and an extensible *database* and *programming language*.
+Like the old LambdaMOO, it is built around the idea of a small, universal *runtime* (the server or Node) and an extensible *database* and *programming language*.
 
 
 ### Background and some history
@@ -20,7 +20,6 @@ Participants (usually referred to as players) used to connect to LambdaMOO using
 Having connected to a character, players then give one-line commands that are parsed and interpreted by LambdaMOO as appropriate. Such commands may cause changes in the virtual reality, such as the location of a character, or may simply report on the current state of that reality, such as the appearance of some object.
 
 Example:
-
 ```shell
 go north
 look
@@ -33,8 +32,6 @@ Almost every command is parsed by the server into a call on a MOO procedure, or 
 
 **Note:** _Most people tend to associate the term "database" with a "relational database", and most relational database programs tend to keep most of their data in disk storage. The purely technical meaning of "database" is "an organized collection of information." LambdaMOO's database is not relational, it is an object database, and it is kept entirely in-memory. The only reason I'm pointing this out is to head off any chance of you confusing the moo database for a relational database._
 
-
-## Overview
 
 ## Basic Concepts in LambdaNEW
 
@@ -55,14 +52,16 @@ NU implements MOO's approach to OO.
 * NU implements a simple, generic programming language to manipulate objects.
 
 
-`Properties` are values stored on the object and referenced in code via the "." operator, for example:
+`Properties` are values stored on the object and referenced in code via the "." operator.
 
+Example:
 ```shell
 someVariable = object.propertyName
 ```
 
-`Verbs` are code stored on the object and invoked in code via the "." operator, for example:
+`Verbs` are code stored on the object and invoked in code via the "." operator.
 
+Example:
 ```shell
 someVariable = object.verbName()
 ```
@@ -84,12 +83,12 @@ Each object is of one of the following types:
 * Location
 * Thing
 * Actor, with following sub-types
-*   * Person
+    * Person
 *   * Bot
 *   * Agent
 *   * Twin
 
-`Node` is the `root` object of the NU instance/runtime. `Node` contains all other objects in the runtime.
+`Node` is the *root object* of the NU instance and runtime. `Node` contains all other objects in the runtime.
 
 A `Place` represents a logical or abstract location e.g. a room or building.
 
@@ -125,8 +124,6 @@ A `Thing` represents anything in a Node that can be interacted with.
 * Node and Person have an `Identity`
 * Identity is represented by a unique, unmutable public/private key pair.
 * Node and Person have an `address` derieved from their public key.
-
-
 * All objects have an `Owner`
 * All objects have a `Creator`
 * Node and Person are their own owner
