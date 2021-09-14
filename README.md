@@ -84,9 +84,9 @@ Each object is of one of the following types:
 * Thing
 * Actor, with following sub-types
     * Person
-*   * Bot
-*   * Agent
-*   * Twin
+    * Bot
+    * Agent
+    * Twin
 
 `Node` is the *root object* of the NU instance and runtime. `Node` contains all other objects in the runtime.
 
@@ -122,20 +122,20 @@ A `Thing` represents anything in a Node that can be interacted with.
 ### Object Identity and Ownership of objects
 
 * Node and Person have an `Identity`
-* Identity is represented by a unique, unmutable public/private key pair.
-* Node and Person have an `address` derieved from their public key.
+* Identity is represented by a unique, unmutable public/private key pair
+* Node and Person have an `Address` derieved from their public key
 * All objects have an `Owner`
 * All objects have a `Creator`
 * Node and Person are their own owner
-* All other types of objects are by default owned by the Node or Person who created them.
-* An object's creator is unmutable while the object's owner might change over time.
+* All other types of objects are by default owned by the Node or Person who created them
+* An object's creator is unmutable while the object's owner might change over time
 
 
 ### Object migration
 
 * Place, Thing, Person, Bot and Agent can *migrate* from one Node to another Node
 * Node and Twin **CAN NOT** migrate from one Node to another Node
-* Objects contained in another bbject migrate with the parent object
+* Objects contained in another object migrate with their parent object
 * Access controlls, object permissions or ownership rules might prevent object migration
 
 
