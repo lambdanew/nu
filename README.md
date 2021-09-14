@@ -1,39 +1,33 @@
-## NU - The LambdaNEW programming language, runtime, REPL and VM
+The LambdaNEW programming language, runtime, REPL and VM
 
-LambdaNEW and NU, it's programming language and runtime, inherit many ideas from the original LambdaMOO [1][2] system. A lot has changed since LambdaMOO's origin in the mid/late 1990's and this project is an experiment to re-implement many of those ideas with today's technology.
+## LambdaNEW programming language, runtime, REPL and VM
 
-What this repo is:
+### Background and some history
 
-* A definition of NU, the LambdaNEW programming language
-* An implementation of a REPL for NU
-* The NU runtime (and maybe VM, tbd)
+LambdaMOO is a network-accessible, multi-user, programmable, interactive system well-suited to the construction of text-based adventure games, conferencing systems, and other collaborative software. Its most common use, however, is as a multi-participant, low-bandwidth virtual reality, or in 2021s terms, 'a metaverse'.
 
-What this is NOT:
+Participants (usually referred to as players) used to connect to LambdaMOO using Telnet or some other, more specialized, client program. Upon connection, they were usually presented with a welcome message explaining how to either create a new character or connect to an existing one. Characters are the embodiment of players in the virtual reality that is LambdaMOO.
 
-* a blockchain/coin/NFT/Game/Metaverse
-* a node/server implementing the above
+**Note:** _MOOs predate the current app and smartphone centric internet by at least two decades and no one really connects to a MOO over telnet these days. The most logic client would be either a web app or maybe just an extension to a common messenger app like Telegram or Slack._
+
+Having connected to a character, players then give one-line commands that are parsed and interpreted by LambdaMOO as appropriate. Such commands may cause changes in the virtual reality, such as the location of a character, or may simply report on the current state of that reality, such as the appearance of some object.
+
+The job of interpreting those commands is shared between the two major components in the LambdaMOO system: the server and the database. The server is a program, written in a standard programming language, that manages the network connections, maintains queues of commands and other tasks to be executed, controls all access to the database, and executes other programs written in the MOO programming language. The database contains representations of all the objects in the virtual reality, including the MOO programs that the server executes to give those objects their specific behaviors.
+
+Almost every command is parsed by the server into a call on a MOO procedure, or verb, that actually does the work. Thus, programming in the MOO language is a central part of making non-trivial extensions to the database and thus, the virtual reality.
+
+**Note:** _Most people tend to associate the term "database" with a "relational database", and most relational database programs tend to keep most of their data in disk storage. The purely technical meaning of "database" is "an organized collection of information." LambdaMOO's database is not relational, it is an object database, and it is kept entirely in-memory. The only reason I'm pointing this out is to head off any chance of you confusing the moo database for a relational database._
+
+### About LambdaNEW
+
+As the name might suggest, LambdaNEW is an experiment to recreate the LambdaMOO experience with today's technology and possibilities. The mobile internet, the wide adoption of messenger apps and ideas from the blockchain community (I see you rolling your eyes ...) influence LambdaNEW. Like the old LambdaMOO, it is built around the idea of a relatively small *runtime* i.e. the server or `Node` in LambdaNEW terms and an extensible *database* and programming language. 
+
 
 ## Overview
 
-## Basic Terminology
+## Basic Concepts used in LambdaNEW
 
-### Objects, Verbs and Properties
-
-NU consists of objects.
-
-NU objects have properties and verbs.
-
-Properties are values stored on the object and referenced in code via the "." operator, for example:
-
-```shell
-someVariable = object.propertyName
-```
-
-Verbs are code stored on the object and invoked in code via the "." operator, for example:
-
-```shell
-someVariable = object.verbName()
-```
+**Note:** `LambdaNEW` is the name of the project and the entire *system*. `NU` or `Nu` is the name of the programming language and runtime.
 
 ### Object Orientation
 
@@ -42,6 +36,26 @@ MOO stands for "Mud, Object-Oriented". MOO's object-oriented approach is slightl
 In the MOO world, the object is defined by example. You create an object instance in the system and then dynamically add verbs and properties to make your "prototype". Then you can create a new object that is a "decendant" from the original object. The new object in turn can be dynamically modified with more verbs and properties, and then you can create more objects that descend from the second object.
 
 NU follows MOO's approach to OO.
+
+### Objects, Verbs and Properties
+
+* NU consists of objects.
+* NU objects have properties and verbs.
+* NU implements a simple, generic programming language to manipulate objects.
+
+
+`Properties` are values stored on the object and referenced in code via the "." operator, for example:
+
+```shell
+someVariable = object.propertyName
+```
+
+`Verbs` are code stored on the object and invoked in code via the "." operator, for example:
+
+```shell
+someVariable = object.verbName()
+```
+
 
 ### Types of Objects
 
@@ -58,9 +72,13 @@ Each object is of one of the following types:
 * Place
 * Location
 * Thing
-* Actor, with sub-type Person, Bot, Agent or Twin
+* Actor, with following sub-types
+*   * Person
+*   * Bot
+*   * Agent
+*   * Twin
 
-`Node` is the `root` object of the NU instance/runtime. Node contains all other objects in the runtime.
+`Node` is the `root` object of the NU instance/runtime. `Node` contains all other objects in the runtime.
 
 A `Place` represents a logical or abstract location e.g. a room or building.
 
@@ -70,10 +88,11 @@ A `Thing` represents anything in a Node that can be interacted with.
 
 `Actor` as object type is never instantiated directly but represents an abstract type for objects that interact with other objects in the Node. `Actor` can be one of the following:
 
-* `Person`, representing a real person or user
+* `Person`, representing a natural person or legal entity
 * `Bot`, a local software agent
 * `Agent`, a bot, acting on behave of a `Person`
 * `Twin`, a *projection* of a Person from an external Node into the current Node
+
 
 ### Containment rules
 
@@ -90,20 +109,28 @@ A `Thing` represents anything in a Node that can be interacted with.
 * Bot, Agent and Twin can be in Node or in Place
 
 
+### Object Identity and Ownership of objects
+
+* Node and Person have an `Identity`
+* Identity is represented by a unique, unmutable public/private key pair.
+* Node and Person have an `address` derieved from their public key.
+
+
+* All objects have an `Owner`
+* All objects have a `Creator`
+* Node and Person are their own owner
+* All other types of objects are by default owned by the Node or Person who created them.
+* An object's creator is unmutable while the object's owner might change over time.
+
+
 ### Object migration
 
-* Place, Thing, Person, Bot and Agent can `migrate` from one Node to another Node
-* Node and Twin `CAN NOT` migrate from one Node to another Node
-* Objects contained in another Object migrate with the parent object
+* Place, Thing, Person, Bot and Agent can *migrate* from one Node to another Node
+* Node and Twin **CAN NOT** migrate from one Node to another Node
+* Objects contained in another bbject migrate with the parent object
 * Access controlls, object permissions or ownership rules might prevent object migration
 
 
 ### Access controll, object permissions or ownership rules
 
 TBD
-
-
-## References
-
-* [1: ProgrammersManual.html](http://www.moo-cows.com/docs/manuals/ProgrammersManual.html)
-* [2: moo-programmers-manual-updated.md](https://github.com/lambdanew/lambda-moo-programming/blob/master/tutorials/moo-programmers-manual-updated.md)

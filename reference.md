@@ -9,3 +9,10 @@
 * https://wiki.polkadot.network/
 * https://chainsafe.github.io/gossamer/
 
+
+
+
+## References
+
+* [1: ProgrammersManual.html](http://www.moo-cows.com/docs/manuals/ProgrammersManual.html)
+* [2: moo-programmers-manual-updated.md](https://github.com/lambdanew/lambda-moo-programming/blob/master/tutorials/moo-programmers-manual-updated.md)
